@@ -21,12 +21,14 @@ class CompanyController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(): JsonResponse
+    public function index(Request $request): JsonResponse
     {
-        $pageLimit = 10;
+        $pageLimit = 10;       
         
+        $filter['zip_code'] = null !== $request->input('zip_code') ? $request->input('zip_code') : null;
+
         return response()->json([
-            $this->companyRepository->list($pageLimit)
+            $this->companyRepository->list($filter, $pageLimit)
         ]);
     }
 

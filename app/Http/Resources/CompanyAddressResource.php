@@ -15,7 +15,6 @@ class CompanyAddressResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'company' => (new CompanyResource($this->whenLoaded('company'))),
             'address' => $this->address,
             'number' => $this->number,
             'neighborhood' => $this->neighborhood,

@@ -4,5 +4,5 @@ namespace App\Interfaces;
 
 interface CompanyRepositoryInterface
 {
-    public function list($pageLimit);
+    public function list($filter, $pageLimit);
 }
