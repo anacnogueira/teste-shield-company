@@ -26,9 +26,11 @@ class CompanyController extends Controller
         $pageLimit = 10;       
         
         $filter['zip_code'] = null !== $request->input('zip_code') ? $request->input('zip_code') : null;
-
+        $order = null !== $request->input('order') ? $request->input('order') : null;
+        $sort = null !== $request->input('sort') ? $request->input('sort') : null;
+                
         return response()->json([
-            $this->companyRepository->list($filter, $pageLimit)
+            $this->companyRepository->list($filter, $order, $sort, $pageLimit)
         ]);
     }
 

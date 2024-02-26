@@ -17,17 +17,22 @@ class CompanyRepository implements CompanyRepositoryInterface
         $this->company = $company;
     }
     
-    public function list($filter, $pageLimit)
+    public function list($filter, $order, $sort, $pageLimit)
     {
         $companies = $this->company
             ->with('address');
 
-            if (isset($filter['zip_code'])) {
-                $companies->whereIn('id', function(Builder $query) use($filter){
-                    $this->filterZipCode($query, $filter['zip_code']);
-                });
+        if (isset($filter['zip_code'])) {
+            $companies->whereIn('id', function(Builder $query) use($filter){
+                $this->filterZipCode($query, $filter['zip_code']);
+            });
 
-            }
+        }
+
+        if(isset($order) && isset($sort)) {
+            $companies->orderBy($order, $sort);
+        }
+
         
         return new CompanyCollection($companies->paginate($pageLimit));
     }
