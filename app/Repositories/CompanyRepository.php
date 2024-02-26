@@ -17,7 +17,7 @@ class CompanyRepository implements CompanyRepositoryInterface
     
     public function list()
     {
-        $companies = $this->company->all();
+        $companies = $this->company->with('address')->get();
 
         return $companies;
     }
