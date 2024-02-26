@@ -5,7 +5,8 @@ namespace App\Http\Controllers;
 use App\Interfaces\CompanyRepositoryInterface;
 use Illuminate\Http\JSonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response; 
+use Illuminate\Http\Response;
+
 
 class CompanyController extends Controller
 {
@@ -22,8 +23,10 @@ class CompanyController extends Controller
      */
     public function index(): JsonResponse
     {
+        $pageLimit = 10;
+        
         return response()->json([
-            'data' => $this->companyRepository->list()
+            $this->companyRepository->list($pageLimit)
         ]);
     }
 

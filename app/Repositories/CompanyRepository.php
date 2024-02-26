@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use App\Interfaces\CompanyRepositoryInterface;
 use App\Models\Company;
+use App\Http\Resources\CompanyCollection;
 
 class CompanyRepository implements CompanyRepositoryInterface
 {
@@ -15,10 +16,10 @@ class CompanyRepository implements CompanyRepositoryInterface
         $this->company = $company;
     }
     
-    public function list()
+    public function list($pageLimit)
     {
-        $companies = $this->company->with('address')->get();
+        $companies = $this->company->with('address')->paginate($pageLimit);
 
-        return $companies;
+        return new CompanyCollection($companies);
     }
 }
