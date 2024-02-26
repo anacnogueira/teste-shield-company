@@ -14,9 +14,12 @@ class CompanyCollection extends ResourceCollection
      */
     public function toArray($request)
     {
-       
         return [
-            'data' => $this->collection,
+            'count' => $this->count(),
+            'total' => $this->total(),
+            'prev'  => $this->previousPageUrl(),
+            'next'  => $this->nextPageUrl(),        
+            'data'  => $this->collection
         ];
     }
 }

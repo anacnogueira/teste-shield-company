@@ -7,6 +7,7 @@ use App\Http\Resources\CompanyAddressResource;
 
 class CompanyResource extends JsonResource
 {
+    
     /**
      * Transform the resource into an array.
      *

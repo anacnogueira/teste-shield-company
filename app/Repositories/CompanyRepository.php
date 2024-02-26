@@ -4,7 +4,7 @@ namespace App\Repositories;
 
 use App\Interfaces\CompanyRepositoryInterface;
 use App\Models\Company;
-use App\Http\Resources\CompanyCollection;
+
 use Illuminate\Database\Query\Builder;
 
 class CompanyRepository implements CompanyRepositoryInterface
@@ -32,9 +32,8 @@ class CompanyRepository implements CompanyRepositoryInterface
         if(isset($order) && isset($sort)) {
             $companies->orderBy($order, $sort);
         }
-
         
-        return new CompanyCollection($companies->paginate($pageLimit));
+        return $companies->paginate($pageLimit);
     }
 
 

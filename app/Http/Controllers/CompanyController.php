@@ -6,13 +6,15 @@ use App\Interfaces\CompanyRepositoryInterface;
 use Illuminate\Http\JSonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use App\Http\Resources\CompanyCollection;
 
 
 class CompanyController extends Controller
 {
     private CompanyRepositoryInterface $companyRepository;
 
-    public function __construct(CompanyRepositoryInterface $companyRepository) {
+    public function __construct(CompanyRepositoryInterface $companyRepository)
+    {
         $this->companyRepository = $companyRepository;
     }
     
@@ -29,9 +31,13 @@ class CompanyController extends Controller
         $order = null !== $request->input('order') ? $request->input('order') : null;
         $sort = null !== $request->input('sort') ? $request->input('sort') : null;
                 
-        return response()->json([
+        // return response()->json(
+        //     $this->companyRepository->list($filter, $order, $sort, $pageLimit)
+        // );
+
+        return response()->json(new CompanyCollection(
             $this->companyRepository->list($filter, $order, $sort, $pageLimit)
-        ]);
+        ));
     }
 
  
